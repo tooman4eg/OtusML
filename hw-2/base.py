@@ -1,5 +1,5 @@
 from abc import ABC
-from exceptions import LowFuelError
+from exceptions import LowFuelError, NotEnoughFuel
 
 
 class Vehicle(ABC):
@@ -17,12 +17,21 @@ class Vehicle(ABC):
     # что топлива больше нуля, и обновляет состояние started,
     # иначе выкидывает исключение exceptions.LowFuelError
     def start(self, ):
-        if (self.started):
+        if self.started == False:
             try:
                 if self.fuel > 0:
                     self.started = True
             except LowFuelError:
                 print(LowFuelError())
+        else:
+            LowFuelError('Low fuel')
 
-
-pass
+    # добавьте метод move, который проверяет, что достаточно топлива для преодоления
+    # переданной дистанции, и изменяет количество оставшегося топлива,
+    # иначе выкидывает исключение exceptions.NotEnoughFuel
+    def move(self, consumption):
+        try:
+            if self.fuel >= consumption:
+                self.fuel -= consumption
+        except NotEnoughFuel:
+            print(NotEnoughFuel())
