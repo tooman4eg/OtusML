@@ -1,7 +1,7 @@
 """
 create dataclass `Engine`
 """
-from vehicle import Vehicle
+from homework_02.base import Vehicle
 
 
 class Engine(Vehicle):
